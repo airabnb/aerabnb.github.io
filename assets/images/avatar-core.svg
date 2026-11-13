@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+    <defs>
+        <radialGradient id="cyberBg" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#0a142e"/>
+            <stop offset="100%" stop-color="#040711"/>
+        </radialGradient>
+        <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff"/>
+            <stop offset="100%" stop-color="#0077b6"/>
+        </linearGradient>
+        <linearGradient id="neonPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#9d4edd"/>
+            <stop offset="100%" stop-color="#ff007f"/>
+        </linearGradient>
+        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="500" height="500" fill="url(#cyberBg)" rx="24"/>
+    <circle cx="250" cy="250" r="210" stroke="rgba(0, 240, 255, 0.15)" stroke-width="2" fill="none" stroke-dasharray="8 8"/>
+    <circle cx="250" cy="250" r="180" stroke="url(#neonPurple)" stroke-width="2" fill="none" opacity="0.6"/>
+
+    <!-- Central Outer Hexagon -->
+    <polygon points="250,90 380,165 380,315 250,390 120,315 120,165" stroke="url(#neonCyan)" stroke-width="4" fill="rgba(6, 12, 28, 0.8)" filter="url(#neonGlow)"/>
+
+    <!-- Inner Core & Lines -->
+    <circle cx="250" cy="250" r="45" fill="#00f0ff" opacity="0.2"/>
+    <circle cx="250" cy="250" r="30" fill="url(#neonPurple)" filter="url(#neonGlow)"/>
+    <circle cx="250" cy="250" r="15" fill="#ffffff"/>
+
+    <!-- Circuit Traces -->
+    <path d="M120 165 L180 200 L210 200" stroke="#00f0ff" stroke-width="2" fill="none"/>
+    <path d="M380 315 L320 280 L290 280" stroke="#00ff9d" stroke-width="2" fill="none"/>
+    <path d="M250 90 L250 170" stroke="#ff007f" stroke-width="2" fill="none"/>
+    <path d="M250 390 L250 310" stroke="#00f0ff" stroke-width="2" fill="none"/>
+
+    <text x="250" y="445" font-family="'Orbitron', sans-serif" font-size="20" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="4">ALMAIRA // CORE OS</text>
+</svg>
