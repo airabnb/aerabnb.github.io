@@ -66,15 +66,32 @@
         <div class="hero-grid">
           <!-- Left Column: Intro & Stark Protocol -->
           <div class="hero-text-col">
-            <div class="hero-badge-tag">
-              <span class="badge-pulse"></span>
-              <span>STARK TECH PROTOCOL // SYSTEM ONLINE</span>
-            </div>
+            <!-- Hero Photo Badge Di Depan Judul -->
+            <div class="hero-header-block">
+              <div class="hero-photo-badge tilt-card" title="Profil Terverifikasi: Almaira Ayu Spider-Verse">
+                <div class="hero-photo-ring">
+                  <img src="almaira-spiderman.jpg" alt="Foto Almaira Ayu Spider-Man" class="hero-title-img">
+                  <div class="photo-scan-bar"></div>
+                </div>
+                <div class="hero-photo-tag">
+                  <span class="photo-tag-title">ALMAIRA AYU</span>
+                  <span class="photo-tag-sub">
+                    <span class="photo-tag-dot"></span>
+                    <span>SPIDER-VERSE AGENT // TKJ SPECIALIST</span>
+                  </span>
+                </div>
+              </div>
 
-            <h1 class="hero-title">
-              <span class="title-glitch">ALMAIRA AYU</span>
-              <span class="title-spider">CYBER SPIDER-VERSE</span>
-            </h1>
+              <div class="hero-badge-tag">
+                <span class="badge-pulse"></span>
+                <span>STARK TECH PROTOCOL // SYSTEM ONLINE</span>
+              </div>
+
+              <h1 class="hero-title">
+                <span class="title-glitch">ALMAIRA AYU</span>
+                <span class="title-spider">CYBER SPIDER-VERSE</span>
+              </h1>
+            </div>
 
             <p class="hero-desc">
               Selamat datang di portal masa depan <strong>Almaira Ayu</strong>. Menggabungkan eksplorasi di bidang 
@@ -128,77 +145,10 @@
                 <canvas id="radar-canvas" width="80" height="80"></canvas>
               </div>
 
-              <!-- Center Hologram Mask Graphic -->
+              <!-- Center Hologram Photo Frame -->
               <div class="hologram-avatar-wrap">
                 <div class="hologram-scanline"></div>
-
-                <!-- High-Definition Spider-Man Cyber Mask SVG -->
-                <svg viewBox="0 0 200 240" class="spidey-hero-svg">
-                  <defs>
-                    <radialGradient id="maskShine" cx="50%" cy="40%" r="60%">
-                      <stop offset="0%" stop-color="#ff2e55" />
-                      <stop offset="70%" stop-color="#c90025" />
-                      <stop offset="100%" stop-color="#6e0013" />
-                    </radialGradient>
-                    <linearGradient id="eyeLens" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#ffffff" />
-                      <stop offset="50%" stop-color="#e0ffff" />
-                      <stop offset="100%" stop-color="#00f0ff" />
-                    </linearGradient>
-                    <filter id="hudGlitchGlow">
-                      <feGaussianBlur stdDeviation="4" result="glow" />
-                      <feComposite in="SourceGraphic" in2="glow" operator="over" />
-                    </filter>
-                  </defs>
-
-                  <!-- Head Mask Silhouette -->
-                  <path d="M100 15 C45 15 25 55 25 105 C25 155 55 210 100 228 C145 210 175 155 175 105 C175 55 155 15 100 15 Z" 
-                        fill="url(#maskShine)" stroke="#0f111e" stroke-width="4" />
-
-                  <!-- Web Grid Lines on Mask -->
-                  <!-- Vertical Web Strands -->
-                  <path d="M100 16 L100 227" stroke="#3b000a" stroke-width="2.5" />
-                  <path d="M100 105 Q60 50 48 30" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q140 50 152 30" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q50 90 26 95" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q150 90 174 95" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q60 145 42 165" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q140 145 158 165" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q75 190 70 215" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M100 105 Q125 190 130 215" stroke="#3b000a" stroke-width="2" fill="none" />
-
-                  <!-- Concentric Spider Web Arcs -->
-                  <path d="M72 40 Q100 30 128 40" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M54 60 Q100 48 146 60" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M38 85 Q100 70 162 85" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M42 125 Q100 145 158 125" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M55 160 Q100 185 145 160" stroke="#3b000a" stroke-width="2" fill="none" />
-                  <path d="M72 190 Q100 210 128 190" stroke="#3b000a" stroke-width="2" fill="none" />
-
-                  <!-- Left Eye Outer Black Border -->
-                  <path d="M42 90 C45 68 76 72 88 104 C88 122 70 128 50 122 C40 118 40 102 42 90 Z" 
-                        fill="#0c0e18" stroke="#00f0ff" stroke-width="2.5" />
-                  <!-- Left Eye Glowing Lens -->
-                  <path d="M48 92 C51 76 72 80 82 104 C82 118 68 122 54 118 C47 114 46 102 48 92 Z" 
-                        fill="url(#eyeLens)" filter="url(#hudGlitchGlow)" />
-                  <!-- Eye Specular Highlight -->
-                  <ellipse cx="70" cy="94" rx="4" ry="7" fill="#ffffff" opacity="0.9" />
-
-                  <!-- Right Eye Outer Black Border -->
-                  <path d="M158 90 C155 68 124 72 112 104 C112 122 130 128 150 122 C160 118 160 102 158 90 Z" 
-                        fill="#0c0e18" stroke="#00f0ff" stroke-width="2.5" />
-                  <!-- Right Eye Glowing Lens -->
-                  <path d="M152 92 C149 76 128 80 118 104 C118 118 132 122 146 118 C153 114 154 102 152 92 Z" 
-                        fill="url(#eyeLens)" filter="url(#hudGlitchGlow)" />
-                  <!-- Eye Specular Highlight -->
-                  <ellipse cx="130" cy="94" rx="4" ry="7" fill="#ffffff" opacity="0.9" />
-
-                  <!-- Cyber Circuit Accent Nodes -->
-                  <circle cx="100" cy="15" r="3" fill="#00f0ff" />
-                  <circle cx="25" cy="105" r="3" fill="#00f0ff" />
-                  <circle cx="175" cy="105" r="3" fill="#00f0ff" />
-                  <circle cx="100" cy="227" r="3" fill="#00f0ff" />
-                </svg>
+                <img src="almaira-spiderman.jpg" alt="Almaira Ayu Cyber Spider-Man" class="hologram-photo-img">
               </div>
 
               <!-- Floating Info Badges -->
@@ -228,15 +178,7 @@
           <div class="hud-card profile-holo-card tilt-card">
             <div class="avatar-badge-wrap">
               <div class="avatar-badge-circle">
-                <!-- Spider-Man Cyber Profile Icon -->
-                <svg viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="44" fill="#ff1044" />
-                  <!-- Mask Eyes -->
-                  <path d="M22 44 C26 30 42 32 46 50 C46 60 38 62 26 58 C21 56 20 48 22 44 Z" fill="#0b0e1b" stroke="#fff" stroke-width="1.8" />
-                  <path d="M26 44 C29 34 39 36 42 48 C42 56 36 58 28 55 Z" fill="#e0f7fa" />
-                  <path d="M78 44 C74 30 58 32 54 50 C54 60 62 62 74 58 C79 56 80 48 78 44 Z" fill="#0b0e1b" stroke="#fff" stroke-width="1.8" />
-                  <path d="M74 44 C71 34 61 36 58 48 C58 56 64 58 72 55 Z" fill="#e0f7fa" />
-                </svg>
+                <img src="almaira-spiderman.jpg" alt="Foto Profil Almaira Ayu" class="avatar-photo-img">
               </div>
               <div class="avatar-status-pill">● TERHUBUNG // TKJ</div>
             </div>
