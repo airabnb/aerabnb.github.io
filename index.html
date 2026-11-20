@@ -1,890 +1,767 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALMAIRA AYU // Digital Architect & Creative Developer</title>
-    <meta name="description" content="Portfolio interaktif dengan tema futuristik dan digital cybernetic. Menampilkan proyek, keahlian, dan terminal interaktif.">
-    
-    <!-- Google Fonts: Orbitron & Rajdhani & JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/animations.css">
-    
-    <!-- Favicon (Data URI Cyber Icon) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Almaira Ayu // Cyber Spider-Verse</title>
+  <meta name="description" content="Website profil dan data diri interaktif Almaira Ayu dengan tema digital futuristik dan karakter Marvel Spider-Man beserta Chibi Spidey.">
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23ff1044'/><polygon points='50,20 65,40 50,35 35,40' fill='%2300f0ff'/><ellipse cx='50' cy='55' rx='18' ry='22' fill='%23060814'/><path d='M38 50 C40 42 46 44 48 54 C48 58 44 60 38 57 Z' fill='%23ffffff'/><path d='M62 50 C60 42 54 44 52 54 C52 58 56 60 62 57 Z' fill='%23ffffff'/></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="cyber-theme">
-    <!-- Custom Cyber Cursor -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-ring" id="cursor-ring"></div>
-    <div class="cursor-crosshair" id="cursor-crosshair"></div>
+<body data-theme="classic">
 
-    <!-- Background Interactive Canvas & Grid Overlay -->
-    <canvas id="cyber-canvas"></canvas>
-    <div class="scanlines"></div>
-    <div class="vignette"></div>
+  <!-- TOP CYBER HUD NAVBAR -->
+  <header class="cyber-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <!-- Brand & Spider Logo -->
+        <a href="#hero" class="nav-brand">
+          <svg class="brand-icon" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="#ff1044" stroke="#00f0ff" stroke-width="3" />
+            <!-- Spider emblem -->
+            <ellipse cx="50" cy="52" rx="9" ry="14" fill="#060814" />
+            <!-- Legs -->
+            <path d="M44 45 Q30 35 24 40 M44 50 Q28 48 22 55 M44 55 Q30 62 26 68 M44 58 Q34 72 30 80" stroke="#060814" stroke-width="3.5" fill="none" />
+            <path d="M56 45 Q70 35 76 40 M56 50 Q72 48 78 55 M56 55 Q70 62 74 68 M56 58 Q66 72 70 80" stroke="#060814" stroke-width="3.5" fill="none" />
+            <!-- Head & Eyes -->
+            <circle cx="50" cy="34" r="6" fill="#060814" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">ALMAIRA AYU</span>
+            <span class="brand-sub">CYBER SPIDER-VERSE // TKJ SPECIALIST</span>
+          </div>
+        </a>
 
-    <!-- Top Status HUD Bar -->
-    <div class="hud-top-bar">
-        <div class="hud-item system-status">
-            <span class="status-indicator live"></span>
-            <span class="hud-label">SYSTEM:</span>
-            <span class="hud-value neon-cyan">ONLINE // STABLE</span>
+        <!-- Suit Selector (Themes) -->
+        <div class="nav-suit-picker">
+          <span class="suit-label">SUIT:</span>
+          <button class="suit-pill active" data-suit="classic" title="Classic Peter Parker Red & Blue">🔴 Classic</button>
+          <button class="suit-pill" data-suit="miles" title="Miles Morales Cyber Glitch">⚡ Miles 2099</button>
+          <button class="suit-pill" data-suit="iron" title="Tony Stark Iron Spider Nanotech">🟡 Iron Spider</button>
+          <button class="suit-pill" data-suit="gwen" title="Spider-Gwen Neon Ghost">🌸 Gwen</button>
         </div>
-        <div class="hud-item hud-center-tag">
-            <span class="cyber-bracket">[</span> SECURE TERMINAL v4.0.9 <span class="cyber-bracket">]</span>
+
+        <!-- Quick Actions (Audio & Web Shoot) -->
+        <div class="nav-actions">
+          <button class="hud-btn-sm" id="quick-shoot-btn" title="Klik untuk melontarkan jaring web laser">
+            <span>🕸️</span> <span>Tembak Web</span>
+          </button>
+          <button class="hud-btn-sm" id="audio-toggle-btn" title="Aktifkan / Bisukan Efek Suara Stark Tech">
+            <span class="audio-icon">🔊</span> <span class="audio-text">Audio: ON</span>
+          </button>
         </div>
-        <div class="hud-item hud-controls">
-            <div class="uptime-counter">
-                <span class="hud-label">UPTIME:</span>
-                <span id="system-uptime" class="hud-value">00:00:00</span>
-            </div>
-            <button id="sfx-toggle" class="hud-btn" title="Toggle UI Audio Synthesis" aria-label="Toggle Audio">
-                <span class="sfx-icon">🔊</span>
-                <span class="sfx-text">AUDIO: ON</span>
-            </button>
-        </div>
+      </div>
     </div>
+  </header>
 
-    <!-- Main Navigation Bar -->
-    <header class="cyber-header" id="navbar">
-        <div class="header-container">
-            <a href="#hero" class="brand-logo" data-sound="hover">
-                <span class="brand-prefix">&lt;</span>
-                <span class="brand-name">ALMAIRA</span>
-                <span class="brand-cursor">_</span>
-                <span class="brand-suffix">/&gt;</span>
-            </a>
-
-            <nav class="cyber-nav" id="cyber-nav">
-                <ul class="nav-links">
-                    <li><a href="#hero" class="nav-item active" data-sound="hover"><span class="nav-idx">01</span> // HERO</a></li>
-                    <li><a href="#about" class="nav-item" data-sound="hover"><span class="nav-idx">02</span> // IDENTITY</a></li>
-                    <li><a href="#skills" class="nav-item" data-sound="hover"><span class="nav-idx">03</span> // ARSENAL</a></li>
-                    <li><a href="#projects" class="nav-item" data-sound="hover"><span class="nav-idx">04</span> // MISSIONS</a></li>
-                    <li><a href="#timeline" class="nav-item" data-sound="hover"><span class="nav-idx">05</span> // TIMELINE</a></li>
-                    <li><a href="#terminal" class="nav-item" data-sound="hover"><span class="nav-idx">06</span> // TERMINAL</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-actions">
-                <a href="#contact" class="cyber-btn cyber-btn-sm cyber-btn-glitch" data-sound="click">
-                    <span class="btn-text">INITIALIZE COMMS</span>
-                    <span class="btn-bracket">»</span>
-                </a>
-                <button class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left Column: Intro & Stark Protocol -->
+          <div class="hero-text-col">
+            <div class="hero-badge-tag">
+              <span class="badge-pulse"></span>
+              <span>STARK TECH PROTOCOL // SYSTEM ONLINE</span>
             </div>
+
+            <h1 class="hero-title">
+              <span class="title-glitch">ALMAIRA AYU</span>
+              <span class="title-spider">CYBER SPIDER-VERSE</span>
+            </h1>
+
+            <p class="hero-desc">
+              Selamat datang di portal masa depan <strong>Almaira Ayu</strong>. Menggabungkan eksplorasi di bidang 
+              <strong>Teknik Komputer & Jaringan (TKJ)</strong>, antarmuka digital modern, dan filosofi superhero Spider-Man: 
+              <em>"With great power comes great responsibility."</em>
+            </p>
+
+            <!-- Telemetry Stats Grid -->
+            <div class="hero-telemetry-row">
+              <div class="telem-box">
+                <div class="telem-label">STATUS OPERASIONAL</div>
+                <div class="telem-val" style="color: #00e676;">AKTIF 🟢</div>
+              </div>
+              <div class="telem-box">
+                <div class="telem-label">WAKTU SISTEM</div>
+                <div class="telem-val" id="hud-time">--:--:--</div>
+              </div>
+              <div class="telem-box">
+                <div class="telem-label">SPIDEY SENSE</div>
+                <div class="telem-val" style="color: var(--spider-accent);">100% ⚡</div>
+              </div>
+              <div class="telem-box">
+                <div class="telem-label">JARINGAN / LAN</div>
+                <div class="telem-val" style="color: var(--spider-blue);">ONLINE 🌐</div>
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hero-cta-group">
+              <a href="#about" class="btn-spider-primary">
+                <span>🕷️ Kenali Almaira</span>
+              </a>
+              <a href="#skills" class="btn-spider-outline">
+                <span>⚡ Stark Arsenal (Skill)</span>
+              </a>
+              <a href="#contact" class="btn-spider-outline">
+                <span>📡 Hubungi Almaira</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Stark HUD Centerpiece -->
+          <div class="hero-visual-card">
+            <div class="stark-hud-frame">
+              <!-- Animated HUD concentric rings -->
+              <div class="hud-ring-outer"></div>
+              <div class="hud-ring-middle"></div>
+
+              <!-- Spider-Sense Radar Canvas Mini Display -->
+              <div class="hud-radar-display" title="Radar Spidey-Sense Real-Time">
+                <canvas id="radar-canvas" width="80" height="80"></canvas>
+              </div>
+
+              <!-- Center Hologram Mask Graphic -->
+              <div class="hologram-avatar-wrap">
+                <div class="hologram-scanline"></div>
+
+                <!-- High-Definition Spider-Man Cyber Mask SVG -->
+                <svg viewBox="0 0 200 240" class="spidey-hero-svg">
+                  <defs>
+                    <radialGradient id="maskShine" cx="50%" cy="40%" r="60%">
+                      <stop offset="0%" stop-color="#ff2e55" />
+                      <stop offset="70%" stop-color="#c90025" />
+                      <stop offset="100%" stop-color="#6e0013" />
+                    </radialGradient>
+                    <linearGradient id="eyeLens" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#e0ffff" />
+                      <stop offset="100%" stop-color="#00f0ff" />
+                    </linearGradient>
+                    <filter id="hudGlitchGlow">
+                      <feGaussianBlur stdDeviation="4" result="glow" />
+                      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+                    </filter>
+                  </defs>
+
+                  <!-- Head Mask Silhouette -->
+                  <path d="M100 15 C45 15 25 55 25 105 C25 155 55 210 100 228 C145 210 175 155 175 105 C175 55 155 15 100 15 Z" 
+                        fill="url(#maskShine)" stroke="#0f111e" stroke-width="4" />
+
+                  <!-- Web Grid Lines on Mask -->
+                  <!-- Vertical Web Strands -->
+                  <path d="M100 16 L100 227" stroke="#3b000a" stroke-width="2.5" />
+                  <path d="M100 105 Q60 50 48 30" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q140 50 152 30" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q50 90 26 95" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q150 90 174 95" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q60 145 42 165" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q140 145 158 165" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q75 190 70 215" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M100 105 Q125 190 130 215" stroke="#3b000a" stroke-width="2" fill="none" />
+
+                  <!-- Concentric Spider Web Arcs -->
+                  <path d="M72 40 Q100 30 128 40" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M54 60 Q100 48 146 60" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M38 85 Q100 70 162 85" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M42 125 Q100 145 158 125" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M55 160 Q100 185 145 160" stroke="#3b000a" stroke-width="2" fill="none" />
+                  <path d="M72 190 Q100 210 128 190" stroke="#3b000a" stroke-width="2" fill="none" />
+
+                  <!-- Left Eye Outer Black Border -->
+                  <path d="M42 90 C45 68 76 72 88 104 C88 122 70 128 50 122 C40 118 40 102 42 90 Z" 
+                        fill="#0c0e18" stroke="#00f0ff" stroke-width="2.5" />
+                  <!-- Left Eye Glowing Lens -->
+                  <path d="M48 92 C51 76 72 80 82 104 C82 118 68 122 54 118 C47 114 46 102 48 92 Z" 
+                        fill="url(#eyeLens)" filter="url(#hudGlitchGlow)" />
+                  <!-- Eye Specular Highlight -->
+                  <ellipse cx="70" cy="94" rx="4" ry="7" fill="#ffffff" opacity="0.9" />
+
+                  <!-- Right Eye Outer Black Border -->
+                  <path d="M158 90 C155 68 124 72 112 104 C112 122 130 128 150 122 C160 118 160 102 158 90 Z" 
+                        fill="#0c0e18" stroke="#00f0ff" stroke-width="2.5" />
+                  <!-- Right Eye Glowing Lens -->
+                  <path d="M152 92 C149 76 128 80 118 104 C118 118 132 122 146 118 C153 114 154 102 152 92 Z" 
+                        fill="url(#eyeLens)" filter="url(#hudGlitchGlow)" />
+                  <!-- Eye Specular Highlight -->
+                  <ellipse cx="130" cy="94" rx="4" ry="7" fill="#ffffff" opacity="0.9" />
+
+                  <!-- Cyber Circuit Accent Nodes -->
+                  <circle cx="100" cy="15" r="3" fill="#00f0ff" />
+                  <circle cx="25" cy="105" r="3" fill="#00f0ff" />
+                  <circle cx="175" cy="105" r="3" fill="#00f0ff" />
+                  <circle cx="100" cy="227" r="3" fill="#00f0ff" />
+                </svg>
+              </div>
+
+              <!-- Floating Info Badges -->
+              <div class="hud-tag-float top-left">
+                <span style="color: #00f0ff;">⚡</span> HOST: ALMAIRA-TKJ-NODE
+              </div>
+              <div class="hud-tag-float bottom-right">
+                <span style="color: #ff1044;">🛡️</span> PROTOCOL: SECURE
+              </div>
+            </div>
+          </div>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main id="main-content">
-        <!-- ==================== HERO SECTION ==================== -->
-        <section id="hero" class="cyber-section hero-section">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <div class="cyber-badge-wrapper">
-                        <div class="cyber-badge pulse-anim">
-                            <span class="badge-dot"></span>
-                            <span class="badge-text">DIGITAL ARCHITECT & CREATIVE TECH</span>
-                        </div>
-                    </div>
-
-                    <h1 class="hero-title">
-                        <span class="hero-greeting">HALO, SAYA</span>
-                        <span class="glitch-text" data-text="ALMAIRA AYU">ALMAIRA AYU</span>
-                    </h1>
-
-                    <div class="hero-role-wrapper">
-                        <span class="role-prefix">&gt; </span>
-                        <span class="scramble-text" id="role-cycler" data-phrases='["Full-Stack Web Architect", "Creative Technologist", "Cyberpunk UI/UX Designer", "Interactive Experience Dev"]'>Creative Technologist</span>
-                        <span class="typing-cursor">█</span>
-                    </div>
-
-                    <p class="hero-bio">
-                        Membangun pengalaman web futuristik generasi berikutnya dengan perpaduan performa tinggi, animasi visual imersif, dan arsitektur kode modern berstandar industri.
-                    </p>
-
-                    <div class="hero-cta-group">
-                        <a href="#projects" class="cyber-btn cyber-btn-primary" data-sound="click">
-                            <span class="btn-bg"></span>
-                            <span class="btn-content">
-                                <span class="btn-icon">⚡</span>
-                                <span class="btn-text">JELAJAHI MISI</span>
-                            </span>
-                        </a>
-                        <a href="#terminal" class="cyber-btn cyber-btn-ghost" data-sound="click">
-                            <span class="btn-content">
-                                <span class="btn-icon">&gt;_</span>
-                                <span class="btn-text">BUKA TERMINAL</span>
-                            </span>
-                        </a>
-                        <a href="#contact" class="cyber-btn cyber-btn-outline" data-sound="click">
-                            <span class="btn-content">
-                                <span class="btn-icon">📡</span>
-                                <span class="btn-text">HUBUNGI SAYA</span>
-                            </span>
-                        </a>
-                    </div>
-
-                    <!-- Hero Quick Telemetry -->
-                    <div class="hero-telemetry">
-                        <div class="telemetry-card tilt-card" data-sound="hover">
-                            <span class="telemetry-num" data-target="24">0</span><span class="telemetry-symbol">+</span>
-                            <span class="telemetry-label">MISI SELESAI</span>
-                        </div>
-                        <div class="telemetry-card tilt-card" data-sound="hover">
-                            <span class="telemetry-num" data-target="99">0</span><span class="telemetry-symbol">%</span>
-                            <span class="telemetry-label">EFISIENSI SISTEM</span>
-                        </div>
-                        <div class="telemetry-card tilt-card" data-sound="hover">
-                            <span class="telemetry-num" data-target="5">0</span><span class="telemetry-symbol">+</span>
-                            <span class="telemetry-label">TAHUN EKSPORASI</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Graphic: Holographic Digital Core -->
-                <div class="hero-visual">
-                    <div class="holo-core-container tilt-card" id="holo-container">
-                        <div class="holo-ring outer-ring"></div>
-                        <div class="holo-ring middle-ring"></div>
-                        <div class="holo-ring inner-ring"></div>
-                        <div class="holo-radar-scan"></div>
-                        
-                        <div class="avatar-holo-wrapper">
-                            <div class="cyber-avatar">
-                                <svg class="avatar-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="cyberGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" stop-color="#00f0ff" />
-                                            <stop offset="50%" stop-color="#7000ff" />
-                                            <stop offset="100%" stop-color="#ff007b" />
-                                        </linearGradient>
-                                        <radialGradient id="cyberGlow" cx="50%" cy="50%" r="50%">
-                                            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8"/>
-                                            <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
-                                        </radialGradient>
-                                    </defs>
-                                    <!-- Hexagonal Shield -->
-                                    <polygon points="100,15 175,55 175,145 100,185 25,145 25,55" stroke="url(#cyberGrad1)" stroke-width="3" fill="#0c1022" />
-                                    <!-- Circuit lines -->
-                                    <path d="M50 70 L80 70 L95 85 L140 85" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-                                    <path d="M150 130 L120 130 L105 115 L60 115" stroke="#00ff9d" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-                                    <!-- Glowing nodes -->
-                                    <circle cx="100" cy="100" r="32" fill="url(#cyberGlow)"/>
-                                    <circle cx="100" cy="100" r="18" fill="#00f0ff" opacity="0.9"/>
-                                    <!-- Core emblem: Geometric Matrix Glyph -->
-                                    <path d="M100 86 L112 100 L100 114 L88 100 Z" fill="#080a14" stroke="#ffffff" stroke-width="2"/>
-                                    <!-- Orbiting Satellites -->
-                                    <circle cx="100" cy="40" r="4" fill="#00f0ff" />
-                                    <circle cx="160" cy="100" r="4" fill="#ff007b" />
-                                    <circle cx="100" cy="160" r="4" fill="#00ff9d" />
-                                    <circle cx="40" cy="100" r="4" fill="#7000ff" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- HUD Floating Data Badges -->
-                        <div class="holo-data-tag tag-top" data-sound="hover">
-                            <span class="tag-title">NODE ID</span>
-                            <span class="tag-val neon-cyan">ALMAIRA-092X</span>
-                        </div>
-                        <div class="holo-data-tag tag-bottom" data-sound="hover">
-                            <span class="tag-title">SEC_LEVEL</span>
-                            <span class="tag-val neon-green">ALPHA_ROOT</span>
-                        </div>
-                        <div class="holo-data-tag tag-right" data-sound="hover">
-                            <span class="tag-title">LATENCY</span>
-                            <span class="tag-val neon-purple" id="ping-val">18ms</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="scroll-cue">
-                <a href="#about" aria-label="Gulir ke bawah">
-                    <span class="cue-label">SCROLL TO INITIALIZE</span>
-                    <div class="cue-mouse">
-                        <div class="cue-wheel"></div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- ==================== ABOUT / IDENTITY SECTION ==================== -->
-        <section id="about" class="cyber-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <div class="section-index neon-cyan">// 02. DOSSIER</div>
-                    <h2 class="section-title">IDENTITAS & SPESIFIKASI SISTEM</h2>
-                    <div class="section-line"></div>
-                </div>
-
-                <div class="about-grid">
-                    <!-- Left Spec Dossier -->
-                    <div class="cyber-card dossier-card tilt-card" data-sound="hover">
-                        <div class="card-corner corner-tl"></div>
-                        <div class="card-corner corner-tr"></div>
-                        <div class="card-corner corner-bl"></div>
-                        <div class="card-corner corner-br"></div>
-                        
-                        <div class="card-header">
-                            <span class="dossier-id">SYS_SPEC // ALMAIRA</span>
-                            <span class="dossier-status">CONFIDENTIAL</span>
-                        </div>
-
-                        <div class="dossier-body">
-                            <div class="dossier-row">
-                                <span class="d-label">CODENAME:</span>
-                                <span class="d-val neon-cyan">Almaira Ayu / Cyber-Arch</span>
-                            </div>
-                            <div class="dossier-row">
-                                <span class="d-label">SPECIALIZATION:</span>
-                                <span class="d-val">Interactive Web & Full-Stack Systems</span>
-                            </div>
-                            <div class="dossier-row">
-                                <span class="d-label">ORIGIN:</span>
-                                <span class="d-val">Indonesia [Geo: 106.8456° E, 6.2088° S]</span>
-                            </div>
-                            <div class="dossier-row">
-                                <span class="d-label">LANGUAGES:</span>
-                                <span class="d-val">Bahasa Indonesia, English, Binary/JS</span>
-                            </div>
-                            <div class="dossier-row">
-                                <span class="d-label">STATUS:</span>
-                                <span class="d-val neon-green">READY FOR DEPLOYMENT / COLLAB</span>
-                            </div>
-                        </div>
-
-                        <div class="card-footer dossier-tags">
-                            <span class="chip">UI/UX</span>
-                            <span class="chip">ANIMATION</span>
-                            <span class="chip">FULLSTACK</span>
-                            <span class="chip">WEB_AUDIO</span>
-                            <span class="chip">WEBGL</span>
-                        </div>
-                    </div>
-
-                    <!-- Right Narrative -->
-                    <div class="about-narrative">
-                        <div class="narrative-box">
-                            <h3 class="narrative-title neon-cyan">Filosofi Eksplorasi Digital</h3>
-                            <p>
-                                Di era digital yang bergerak secepat kilat, saya mendedikasikan keahlian saya untuk menjembatani ide-ide konseptual menjadi antarmuka nyata yang responsif, estetis, dan intuitif.
-                            </p>
-                            <p>
-                                Fokus saya adalah merancang sistem frontend modern yang memikat pengguna sejak detik pertama—menggabungkan animasi berbasis fisika, arsitektur data yang efisien, dan performa tinggi tanpa kompromi.
-                            </p>
-                        </div>
-
-                        <div class="core-traits-grid">
-                            <div class="trait-card tilt-card" data-sound="hover">
-                                <div class="trait-icon">⚡</div>
-                                <h4 class="trait-title">High Performance</h4>
-                                <p class="trait-desc">Optimalisasi kode untuk loading instan, 60 FPS rendering, dan pengalaman mulus di semua perangkat.</p>
-                            </div>
-                            <div class="trait-card tilt-card" data-sound="hover">
-                                <div class="trait-icon">🛡️</div>
-                                <h4 class="trait-title">Clean Architecture</h4>
-                                <p class="trait-desc">Struktur kode modular, clean, mudah dimaintain, dan scalable untuk kebutuhan jangka panjang.</p>
-                            </div>
-                            <div class="trait-card tilt-card" data-sound="hover">
-                                <div class="trait-icon">🎨</div>
-                                <h4 class="trait-title">Futuristic Aesthetics</h4>
-                                <p class="trait-desc">Sentuhan estetika digital sci-fi, glassmorphism, micro-interactions, dan visual interaktif dinamis.</p>
-                            </div>
-                            <div class="trait-card tilt-card" data-sound="hover">
-                                <div class="trait-icon">🧠</div>
-                                <h4 class="trait-title">Problem Solver</h4>
-                                <p class="trait-desc">Menganalisis kebutuhan kompleks dan menerjemahkannya ke dalam solusi perangkat lunak yang elegan.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== SKILLS / ARSENAL SECTION ==================== -->
-        <section id="skills" class="cyber-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <div class="section-index neon-cyan">// 03. ARSENAL</div>
-                    <h2 class="section-title">KEAHLIAN & TEKNOLOGI INTI</h2>
-                    <div class="section-line"></div>
-                </div>
-
-                <!-- Skill Filter Tabs -->
-                <div class="skill-tabs">
-                    <button class="skill-tab-btn active" data-filter="all" data-sound="click">SEMUA MODUL</button>
-                    <button class="skill-tab-btn" data-filter="frontend" data-sound="click">FRONTEND & UI</button>
-                    <button class="skill-tab-btn" data-filter="backend" data-sound="click">BACKEND & API</button>
-                    <button class="skill-tab-btn" data-filter="tools" data-sound="click">TOOLS & DEVOPS</button>
-                </div>
-
-                <!-- Skill Cards Grid -->
-                <div class="skills-grid" id="skills-grid">
-                    <!-- HTML5 / Semantic -->
-                    <div class="skill-card tilt-card" data-category="frontend" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">🌐</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">HTML5 & Web Semantics</h3>
-                                <span class="skill-level">MASTERY 98%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 98%;"></div>
-                        </div>
-                        <p class="skill-desc">Struktur semantik modern, SEO optimal, aksesibilitas ARIA & arsitektur DOM tingkat lanjut.</p>
-                    </div>
-
-                    <!-- CSS3 / Modern Layouts -->
-                    <div class="skill-card tilt-card" data-category="frontend" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">🎨</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">CSS3 / SASS / Glassmorphism</h3>
-                                <span class="skill-level">MASTERY 95%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 95%;"></div>
-                        </div>
-                        <p class="skill-desc">Animasi Keyframes, CSS Grid & Flexbox, Custom Properties, Clip-Path & tema dinamis.</p>
-                    </div>
-
-                    <!-- JavaScript (ESNext) -->
-                    <div class="skill-card tilt-card" data-category="frontend" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">⚡</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">Modern JavaScript (ESNext)</h3>
-                                <span class="skill-level">MASTERY 94%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 94%;"></div>
-                        </div>
-                        <p class="skill-desc">Async/Await, Canvas API, Web Audio API, Reactive DOM, modul arsitektur tanpa dependensi berat.</p>
-                    </div>
-
-                    <!-- React / Vue -->
-                    <div class="skill-card tilt-card" data-category="frontend" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">⚛️</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">React.js & Next.js</h3>
-                                <span class="skill-level">MASTERY 90%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 90%;"></div>
-                        </div>
-                        <p class="skill-desc">Komponen berbasis hooks, state management, SSR/SSG, dan performa render prima.</p>
-                    </div>
-
-                    <!-- Node.js & Express -->
-                    <div class="skill-card tilt-card" data-category="backend" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">🟢</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">Node.js & Express API</h3>
-                                <span class="skill-level">MASTERY 88%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 88%;"></div>
-                        </div>
-                        <p class="skill-desc">RESTful endpoint, JWT Security, WebSocket real-time messaging & optimasi query.</p>
-                    </div>
-
-                    <!-- Databases -->
-                    <div class="skill-card tilt-card" data-category="backend" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">🗄️</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">PostgreSQL & MongoDB</h3>
-                                <span class="skill-level">MASTERY 86%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 86%;"></div>
-                        </div>
-                        <p class="skill-desc">Relational & NoSQL modeling, aggregations, indexing, dan migrasi schema data teratur.</p>
-                    </div>
-
-                    <!-- Git & Version Control -->
-                    <div class="skill-card tilt-card" data-category="tools" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">🌿</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">Git & GitHub Pipelines</h3>
-                                <span class="skill-level">MASTERY 92%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 92%;"></div>
-                        </div>
-                        <p class="skill-desc">Branching workflows, GitHub Actions CI/CD automation, code review, release tagging.</p>
-                    </div>
-
-                    <!-- Docker & Cloud Deployment -->
-                    <div class="skill-card tilt-card" data-category="tools" data-sound="hover">
-                        <div class="skill-head">
-                            <span class="skill-icon">🐳</span>
-                            <div class="skill-meta">
-                                <h3 class="skill-name">Docker & Cloud Host</h3>
-                                <span class="skill-level">MASTERY 84%</span>
-                            </div>
-                        </div>
-                        <div class="meter-bar">
-                            <div class="meter-fill" style="--percent: 84%;"></div>
-                        </div>
-                        <p class="skill-desc">Containerization, multi-stage builds, cloud hosting di VPS, Vercel, AWS & Railway.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== PROJECTS / MISSIONS SECTION ==================== -->
-        <section id="projects" class="cyber-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <div class="section-index neon-cyan">// 04. MISSIONS</div>
-                    <h2 class="section-title">PORTFOLIO & PROYEK TERPILIH</h2>
-                    <div class="section-line"></div>
-                </div>
-
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <article class="project-card tilt-card" data-sound="hover">
-                        <div class="project-frame">
-                            <div class="project-preview-mockup">
-                                <div class="mockup-header">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
-                                    <span class="mockup-url">https://synth-ai.nexus/v2</span>
-                                </div>
-                                <div class="mockup-screen screen-matrix">
-                                    <div class="screen-hud">
-                                        <div class="screen-data-pulse"></div>
-                                        <span class="screen-tag">NEURAL STREAM // ACTIVE</span>
-                                    </div>
-                                    <div class="screen-graphic">
-                                        <div class="cyber-cube">
-                                            <div class="face front"></div>
-                                            <div class="face back"></div>
-                                            <div class="face right"></div>
-                                            <div class="face left"></div>
-                                            <div class="face top"></div>
-                                            <div class="face bottom"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-content">
-                                <div class="project-meta-row">
-                                    <span class="project-badge neon-cyan">CORE PROJECT #01</span>
-                                    <span class="project-status">STATUS: DEPLOYED</span>
-                                </div>
-                                <h3 class="project-title">Nexus AI Intelligence Hub</h3>
-                                <p class="project-desc">
-                                    Dashboard analitik machine learning dengan streaming visualisasi data real-time, grafik WebGL interaktif, dan kontrol suara neural.
-                                </p>
-                                <div class="project-tech-tags">
-                                    <span class="tech-tag">JavaScript ES6</span>
-                                    <span class="tech-tag">WebGL / Canvas</span>
-                                    <span class="tech-tag">WebSockets</span>
-                                    <span class="tech-tag">CSS Grid</span>
-                                </div>
-                                <div class="project-actions">
-                                    <button class="cyber-btn cyber-btn-sm project-modal-trigger" data-project="0" data-sound="click">
-                                        <span class="btn-text">INSPECT SYSTEM</span>
-                                    </button>
-                                    <a href="#terminal" class="cyber-btn cyber-btn-icon" title="Lihat di Terminal" data-sound="click">&gt;_</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 2 -->
-                    <article class="project-card tilt-card" data-sound="hover">
-                        <div class="project-frame">
-                            <div class="project-preview-mockup">
-                                <div class="mockup-header">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
-                                    <span class="mockup-url">https://cryptonode.secure/vault</span>
-                                </div>
-                                <div class="mockup-screen screen-crypto">
-                                    <div class="screen-hud">
-                                        <div class="screen-data-pulse green-pulse"></div>
-                                        <span class="screen-tag">BLOCK_CHAIN // SYNCED</span>
-                                    </div>
-                                    <div class="screen-crypto-chart">
-                                        <div class="chart-bars">
-                                            <div class="bar" style="--h: 40%"></div>
-                                            <div class="bar" style="--h: 75%"></div>
-                                            <div class="bar" style="--h: 60%"></div>
-                                            <div class="bar" style="--h: 90%"></div>
-                                            <div class="bar" style="--h: 82%"></div>
-                                            <div class="bar" style="--h: 98%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-content">
-                                <div class="project-meta-row">
-                                    <span class="project-badge neon-green">CORE PROJECT #02</span>
-                                    <span class="project-status">STATUS: ONLINE</span>
-                                </div>
-                                <h3 class="project-title">Aegis Crypto Telemetry Vault</h3>
-                                <p class="project-desc">
-                                    Platform pemantau aset digital dan audit smart contract dengan enkripsi end-to-end, visualisasi sentimen pasar, dan zero telemetry leaks.
-                                </p>
-                                <div class="project-tech-tags">
-                                    <span class="tech-tag">React</span>
-                                    <span class="tech-tag">Tailwind</span>
-                                    <span class="tech-tag">Chart.js</span>
-                                    <span class="tech-tag">REST API</span>
-                                </div>
-                                <div class="project-actions">
-                                    <button class="cyber-btn cyber-btn-sm project-modal-trigger" data-project="1" data-sound="click">
-                                        <span class="btn-text">INSPECT SYSTEM</span>
-                                    </button>
-                                    <a href="#terminal" class="cyber-btn cyber-btn-icon" title="Lihat di Terminal" data-sound="click">&gt;_</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 3 -->
-                    <article class="project-card tilt-card" data-sound="hover">
-                        <div class="project-frame">
-                            <div class="project-preview-mockup">
-                                <div class="mockup-header">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
-                                    <span class="mockup-url">https://soundwave.audio/synth</span>
-                                </div>
-                                <div class="mockup-screen screen-audio">
-                                    <div class="screen-hud">
-                                        <div class="screen-data-pulse purple-pulse"></div>
-                                        <span class="screen-tag">AUDIO_FREQ // 44.1kHz</span>
-                                    </div>
-                                    <div class="oscilloscope-ring">
-                                        <div class="audio-wave-anim"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-content">
-                                <div class="project-meta-row">
-                                    <span class="project-badge neon-purple">CORE PROJECT #03</span>
-                                    <span class="project-status">STATUS: ACTIVE</span>
-                                </div>
-                                <h3 class="project-title">Resonance Web Synthesizer</h3>
-                                <p class="project-desc">
-                                    Digital synthesizer berbasis browser yang dibangun dengan Web Audio API native, mendukung polyphony, arpeggiator, dan dynamic visualizer.
-                                </p>
-                                <div class="project-tech-tags">
-                                    <span class="tech-tag">Web Audio API</span>
-                                    <span class="tech-tag">Canvas 2D</span>
-                                    <span class="tech-tag">Custom CSS</span>
-                                    <span class="tech-tag">Vanilla JS</span>
-                                </div>
-                                <div class="project-actions">
-                                    <button class="cyber-btn cyber-btn-sm project-modal-trigger" data-project="2" data-sound="click">
-                                        <span class="btn-text">INSPECT SYSTEM</span>
-                                    </button>
-                                    <a href="#terminal" class="cyber-btn cyber-btn-icon" title="Lihat di Terminal" data-sound="click">&gt;_</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== EXPERIENCE / TIMELINE SECTION ==================== -->
-        <section id="timeline" class="cyber-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <div class="section-index neon-cyan">// 05. TIMELINE</div>
-                    <h2 class="section-title">RIWAYAT & LOG EKSPEDISI</h2>
-                    <div class="section-line"></div>
-                </div>
-
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
-
-                    <!-- Milestone 1 -->
-                    <div class="timeline-item tilt-card" data-sound="hover">
-                        <div class="timeline-dot neon-cyan-glow"></div>
-                        <div class="timeline-card">
-                            <div class="t-date neon-cyan">2024 - SEKARANG</div>
-                            <h3 class="t-role">Senior Creative Technologist</h3>
-                            <h4 class="t-company">CyberSphere Digital Labs</h4>
-                            <p class="t-desc">
-                                Memimpin tim desainer dan insinyur frontend dalam membangun aplikasi interaktif 3D, micro-sites bernilai tinggi, serta desain sistem perusahaan bertaraf internasional.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Milestone 2 -->
-                    <div class="timeline-item tilt-card" data-sound="hover">
-                        <div class="timeline-dot neon-purple-glow"></div>
-                        <div class="timeline-card">
-                            <div class="t-date neon-purple">2022 - 2024</div>
-                            <h3 class="t-role">Full-Stack Interface Engineer</h3>
-                            <h4 class="t-company">Vanguard Solutions</h4>
-                            <p class="t-desc">
-                                Merancang REST API berskala tinggi dengan Node.js, mengintegrasikan visualisasi dashboard analitik, dan memangkas waktu load aplikasi sebesar 45%.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Milestone 3 -->
-                    <div class="timeline-item tilt-card" data-sound="hover">
-                        <div class="timeline-dot neon-green-glow"></div>
-                        <div class="timeline-card">
-                            <div class="t-date neon-green">2020 - 2022</div>
-                            <h3 class="t-role">Frontend Specialist</h3>
-                            <h4 class="t-company">Nova Studio Studio</h4>
-                            <p class="t-desc">
-                                Mengembangkan 30+ website dinamis responsif dengan fokus utama pada aksesibilitas, UX intuitif, dan animasi CSS/JS modern.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== INTERACTIVE TERMINAL SECTION ==================== -->
-        <section id="terminal" class="cyber-section terminal-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <div class="section-index neon-cyan">// 06. CONSOLE</div>
-                    <h2 class="section-title">TERMINAL INTERAKTIF HACKER</h2>
-                    <div class="section-line"></div>
-                </div>
-
-                <div class="terminal-wrapper tilt-card">
-                    <div class="terminal-chrome">
-                        <div class="terminal-buttons">
-                            <span class="btn-dot close"></span>
-                            <span class="btn-dot min"></span>
-                            <span class="btn-dot max"></span>
-                        </div>
-                        <div class="terminal-title">
-                            <span class="term-icon">&gt;_</span> root@almaira-host: ~/profile (bash)
-                        </div>
-                        <div class="terminal-badge">ENCRYPTED: SHA-256</div>
-                    </div>
-
-                    <div class="terminal-body" id="terminal-body">
-                        <div class="terminal-output" id="terminal-output">
-                            <p class="term-line system-msg">ALMAIRA.OS [Version 4.0.9 - Quantum Build]</p>
-                            <p class="term-line system-msg">Inisialisasi antarmuka konsol sukses. Semua perintah root diaktifkan.</p>
-                            <p class="term-line info-msg">Ketik <span class="neon-cyan font-bold">help</span> untuk melihat daftar perintah yang tersedia, atau klik tombol pintasan di bawah.</p>
-                        </div>
-
-                        <!-- Terminal Command Input Bar -->
-                        <div class="terminal-input-row">
-                            <span class="term-prompt"><span class="neon-green">almaira@nexus</span>:<span class="neon-cyan">~</span>$&nbsp;</span>
-                            <input type="text" id="terminal-input" class="term-input" autocomplete="off" spellcheck="false" placeholder="Ketik perintah di sini (misal: 'help', 'skills', 'about')...">
-                            <button id="terminal-run-btn" class="term-run-btn" data-sound="click">EXEC</button>
-                        </div>
-                    </div>
-
-                    <!-- Terminal Quick Command Shortcuts -->
-                    <div class="terminal-shortcuts">
-                        <span class="shortcuts-label">PINTASAN PERINTAH:</span>
-                        <button class="cmd-pill" data-cmd="help" data-sound="click">help</button>
-                        <button class="cmd-pill" data-cmd="about" data-sound="click">about</button>
-                        <button class="cmd-pill" data-cmd="skills" data-sound="click">skills</button>
-                        <button class="cmd-pill" data-cmd="projects" data-sound="click">projects</button>
-                        <button class="cmd-pill" data-cmd="matrix" data-sound="click">matrix</button>
-                        <button class="cmd-pill" data-cmd="contact" data-sound="click">contact</button>
-                        <button class="cmd-pill" data-cmd="clear" data-sound="click">clear</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== CONTACT TRANSMISSION SECTION ==================== -->
-        <section id="contact" class="cyber-section contact-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <div class="section-index neon-cyan">// 07. TRANSMISSION</div>
-                    <h2 class="section-title">HUBUNGI SAYA / KIRIM SINYAL</h2>
-                    <div class="section-line"></div>
-                </div>
-
-                <div class="contact-grid">
-                    <!-- Left: Channel Info -->
-                    <div class="contact-channels cyber-card tilt-card" data-sound="hover">
-                        <h3 class="channel-title neon-cyan">JALUR KOMUNIKASI RESMI</h3>
-                        <p class="channel-desc">
-                            Tertarik untuk berkolaborasi dalam proyek baru, membangun sistem mutakhir, atau sekadar berbincang tentang teknologi? Saluran transmisi terbuka 24/7.
-                        </p>
-
-                        <div class="channel-items">
-                            <div class="channel-item">
-                                <div class="channel-icon">📧</div>
-                                <div class="channel-meta">
-                                    <span class="channel-label">ENCRYPTED EMAIL</span>
-                                    <a href="mailto:almaira.ayu@example.com" class="channel-value neon-cyan">almaira.ayu@example.com</a>
-                                </div>
-                            </div>
-                            <div class="channel-item">
-                                <div class="channel-icon">⚡</div>
-                                <div class="channel-meta">
-                                    <span class="channel-label">GITHUB REPO</span>
-                                    <a href="https://github.com/almaira-ayu" target="_blank" rel="noopener noreferrer" class="channel-value neon-cyan">github.com/almaira-ayu</a>
-                                </div>
-                            </div>
-                            <div class="channel-item">
-                                <div class="channel-icon">💼</div>
-                                <div class="channel-meta">
-                                    <span class="channel-label">LINKEDIN NETWORK</span>
-                                    <a href="https://linkedin.com/in/almaira-ayu" target="_blank" rel="noopener noreferrer" class="channel-value neon-cyan">linkedin.com/in/almaira-ayu</a>
-                                </div>
-                            </div>
-                            <div class="channel-item">
-                                <div class="channel-icon">📍</div>
-                                <div class="channel-meta">
-                                    <span class="channel-label">LOCATION</span>
-                                    <span class="channel-value">Jakarta, Indonesia // Global Remote</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="channel-status-box">
-                            <span class="pulse-ring"></span>
-                            <span class="status-txt">TERBUKA UNTUK FREELANCE & KESEMPATAN KERJA SAMA</span>
-                        </div>
-                    </div>
-
-                    <!-- Right: Interactive Form -->
-                    <div class="contact-form-box cyber-card tilt-card">
-                        <form id="cyber-contact-form" class="cyber-form" novalidate>
-                            <div class="form-group">
-                                <label for="sender-name" class="form-label">
-                                    <span class="label-idx">&gt;</span> NAMA LENGKAP / IDENTIFIER *
-                                </label>
-                                <input type="text" id="sender-name" name="name" class="cyber-input" required placeholder="Contoh: Alex Mercer">
-                                <span class="input-glow"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="sender-email" class="form-label">
-                                    <span class="label-idx">&gt;</span> ALAMAT SUREL / EMAIL *
-                                </label>
-                                <input type="email" id="sender-email" name="email" class="cyber-input" required placeholder="alex@domain.com">
-                                <span class="input-glow"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="sender-subject" class="form-label">
-                                    <span class="label-idx">&gt;</span> SUBJEK MISI
-                                </label>
-                                <input type="text" id="sender-subject" name="subject" class="cyber-input" placeholder="Kolaborasi Proyek / Tawaran Karir">
-                                <span class="input-glow"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="sender-message" class="form-label">
-                                    <span class="label-idx">&gt;</span> ISI TRANSMISI / PESAN *
-                                </label>
-                                <textarea id="sender-message" name="message" rows="4" class="cyber-input cyber-textarea" required placeholder="Tuliskan pesan atau detail kebutuhan proyek Anda di sini..."></textarea>
-                                <span class="input-glow"></span>
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="cyber-btn cyber-btn-primary cyber-btn-block" data-sound="click">
-                                <span class="btn-bg"></span>
-                                <span class="btn-content">
-                                    <span class="btn-icon">🚀</span>
-                                    <span class="btn-text" id="btn-text-content">TRANSMISIKAN PESAN</span>
-                                </span>
-                            </button>
-
-                            <!-- Live Form Status Message Area -->
-                            <div id="form-feedback" class="form-feedback" aria-live="polite"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="cyber-footer">
-        <div class="footer-container">
-            <div class="footer-left">
-                <a href="#hero" class="brand-logo footer-logo">
-                    <span class="brand-prefix">&lt;</span>
-                    <span class="brand-name">ALMAIRA</span>
-                    <span class="brand-suffix">/&gt;</span>
-                </a>
-                <p class="footer-copy">
-                    Dirancang & dikembangkan dengan kode murni HTML, CSS, dan JavaScript interaktif bertema digital futuristik.
-                </p>
-            </div>
-
-            <div class="footer-center">
-                <div class="footer-data-pill">
-                    <span class="p-dot"></span> HOST: LOCAL_KERNEL v4.0.9
-                </div>
-                <div class="footer-data-pill">
-                    <span class="p-dot green"></span> SECURITY: ENCRYPTED
-                </div>
-            </div>
-
-            <div class="footer-right">
-                <p class="footer-credits">
-                    &copy; <span id="current-year">2026</span> ALMAIRA AYU. ALL RIGHTS RESERVED.
-                </p>
-                <div class="back-to-top">
-                    <a href="#hero" class="cyber-btn-top" title="Kembali ke atas" data-sound="click">
-                        ▲ ROOT_TOP
-                    </a>
-                </div>
-            </div>
+    <!-- SECTION 1: IDENTITAS & DATA DIRI ALMAIRA AYU -->
+    <section id="about" class="hud-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-code">// IDENTITY MATRIX 01</div>
+          <h2 class="section-title">DATA DIRI <span>ALMAIRA AYU</span></h2>
+          <p class="section-sub">Informasi personal, visi, filosofi, dan passion di balik dedikasi dunia teknologi.</p>
         </div>
-    </footer>
 
-    <!-- ==================== PROJECT DETAIL MODAL ==================== -->
-    <div class="cyber-modal" id="project-modal" aria-hidden="true" role="dialog">
-        <div class="modal-backdrop" id="modal-backdrop"></div>
-        <div class="modal-dialog tilt-card">
-            <div class="modal-header">
-                <div class="modal-hud-tag">// SYSTEM INSPECTOR</div>
-                <button class="modal-close" id="modal-close" aria-label="Tutup Dialog">&times;</button>
+        <div class="identity-grid">
+          <!-- Left: Holographic ID Card -->
+          <div class="hud-card profile-holo-card tilt-card">
+            <div class="avatar-badge-wrap">
+              <div class="avatar-badge-circle">
+                <!-- Spider-Man Cyber Profile Icon -->
+                <svg viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="44" fill="#ff1044" />
+                  <!-- Mask Eyes -->
+                  <path d="M22 44 C26 30 42 32 46 50 C46 60 38 62 26 58 C21 56 20 48 22 44 Z" fill="#0b0e1b" stroke="#fff" stroke-width="1.8" />
+                  <path d="M26 44 C29 34 39 36 42 48 C42 56 36 58 28 55 Z" fill="#e0f7fa" />
+                  <path d="M78 44 C74 30 58 32 54 50 C54 60 62 62 74 58 C79 56 80 48 78 44 Z" fill="#0b0e1b" stroke="#fff" stroke-width="1.8" />
+                  <path d="M74 44 C71 34 61 36 58 48 C58 56 64 58 72 55 Z" fill="#e0f7fa" />
+                </svg>
+              </div>
+              <div class="avatar-status-pill">● TERHUBUNG // TKJ</div>
             </div>
-            <div class="modal-body" id="modal-body-content">
-                <!-- Dynamically injected via main.js -->
+
+            <h3 class="profile-name">Almaira Ayu</h3>
+            <div class="profile-role">Digital Explorer & IT Specialist</div>
+
+            <!-- Quick Facts List -->
+            <div class="profile-quick-facts">
+              <div class="fact-item">
+                <span class="fact-label">Nama Lengkap</span>
+                <span class="fact-value">Almaira Ayu</span>
+              </div>
+              <div class="fact-item">
+                <span class="fact-label">Nama Panggilan</span>
+                <span class="fact-value">Almaira / Ayu</span>
+              </div>
+              <div class="fact-item">
+                <span class="fact-label">Fokus Utama</span>
+                <span class="fact-value">Teknik Komputer & Jaringan (TKJ)</span>
+              </div>
+              <div class="fact-item">
+                <span class="fact-label">Lokasi</span>
+                <span class="fact-value">Indonesia 🇮🇩</span>
+              </div>
+              <div class="fact-item">
+                <span class="fact-label">Karakter Inspirasi</span>
+                <span class="fact-value" style="color: var(--spider-red);">Spider-Man (Marvel) 🕷️</span>
+              </div>
+              <div class="fact-item">
+                <span class="fact-label">Bahasa</span>
+                <span class="fact-value">Indonesia, English (Tech)</span>
+              </div>
+              <div class="fact-item">
+                <span class="fact-label">Status</span>
+                <span class="fact-value" style="color: #00e676;">Ready for Innovation 🚀</span>
+              </div>
             </div>
+          </div>
+
+          <!-- Right: Narrative Bio & 4 Core Pillars -->
+          <div class="hud-card bio-content-card tilt-card">
+            <div class="bio-quote-box">
+              "With great power comes great responsibility. Bagi saya, keahlian teknologi adalah kekuatan super yang harus terus diasah untuk menciptakan solusi positif dan bermakna bagi sekitar."
+            </div>
+
+            <p class="bio-text-para">
+              Halo! Saya <strong>Almaira Ayu</strong>, seorang penjelajah dunia digital yang memiliki ketertarikan tinggi pada 
+              <strong>Teknik Komputer & Jaringan (TKJ)</strong>, eksplorasi web modern, dan visual kreatif. 
+              Saya memandang dunia teknologi seperti jaring laba-laba raksasa: setiap simpul dan kabel saling terhubung, 
+              membentuk komunikasi yang cerdas, cepat, dan tanpa batas.
+            </p>
+
+            <p class="bio-text-para">
+              Dengan semangat pantang menyerah seperti karakter superhero Marvel <strong>Spider-Man</strong>, saya selalu antusias 
+              mempelajari hal baru, memecahkan masalah troubleshooting, merakit konfigurasi sistem, dan merancang antarmuka web yang 
+              tidak hanya canggih namun juga sangat memanjakan mata secara visual.
+            </p>
+
+            <!-- 4 Pillars Grid -->
+            <div class="bio-pillars-grid">
+              <div class="pillar-box">
+                <div class="pillar-icon">🕸️</div>
+                <div class="pillar-title">Infrastruktur Jaringan</div>
+                <div class="pillar-desc">Memahami arsitektur jaringan LAN/WAN, routing, dan konfigurasi sistem dengan ketelitian tinggi.</div>
+              </div>
+
+              <div class="pillar-box">
+                <div class="pillar-icon">⚡</div>
+                <div class="pillar-title">Inovasi Web Digital</div>
+                <div class="pillar-desc">Merancang antarmuka web futuristik, interaktif, dan responsif di berbagai perangkat.</div>
+              </div>
+
+              <div class="pillar-box">
+                <div class="pillar-icon">🛡️</div>
+                <div class="pillar-title">Spidey-Sense IT</div>
+                <div class="pillar-desc">Kepekaan analitis dalam mendeteksi bug, mengatasi masalah teknis, dan menjaga keamanan sistem.</div>
+              </div>
+
+              <div class="pillar-box">
+                <div class="pillar-icon">🤝</div>
+                <div class="pillar-title">Friendly Neighborhood</div>
+                <div class="pillar-desc">Kolaborasi tim yang hangat, komunikatif, dan selalu siap membantu sesama rekan belajar.</div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SKILL MATRIX (STARK TECH ARSENAL) -->
+    <section id="skills" class="hud-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-code">// STARK TECH ARSENAL 02</div>
+          <h2 class="section-title">KEAHLIAN & <span>KEMAMPUAN DIGITAL</span></h2>
+          <p class="section-sub">Parameter kemampuan teknis dalam ekosistem jaringan, web, hardware, dan problem solving.</p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Skill 1 -->
+          <div class="skill-card tilt-card">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🌐</span>
+                <span class="skill-title">Frontend & Web Development</span>
+              </div>
+              <span class="skill-percent">92%</span>
+            </div>
+            <div class="skill-progress-track">
+              <div class="skill-progress-bar" data-percent="92%"></div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5 Semantic</span>
+              <span class="skill-tag">Modern CSS3</span>
+              <span class="skill-tag">JavaScript ES6+</span>
+              <span class="skill-tag">Responsive UI/UX</span>
+              <span class="skill-tag">Canvas / Web Audio</span>
+            </div>
+          </div>
+
+          <!-- Skill 2 -->
+          <div class="skill-card tilt-card">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🔌</span>
+                <span class="skill-title">Teknik Komputer & Jaringan (TKJ)</span>
+              </div>
+              <span class="skill-percent">90%</span>
+            </div>
+            <div class="skill-progress-track">
+              <div class="skill-progress-bar" data-percent="90%"></div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">LAN / WAN Topology</span>
+              <span class="skill-tag">Subnetting & IP Addressing</span>
+              <span class="skill-tag">MikroTik RouterOS</span>
+              <span class="skill-tag">Cisco Packet Tracer</span>
+              <span class="skill-tag">Kabel UTP / Crimp RJ45</span>
+            </div>
+          </div>
+
+          <!-- Skill 3 -->
+          <div class="skill-card tilt-card">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">💻</span>
+                <span class="skill-title">Hardware IT & Maintenance</span>
+              </div>
+              <span class="skill-percent">94%</span>
+            </div>
+            <div class="skill-progress-track">
+              <div class="skill-progress-bar" data-percent="94%"></div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Perakitan PC & Diagnosa</span>
+              <span class="skill-tag">Instalasi Windows / Linux</span>
+              <span class="skill-tag">Driver & Firmware</span>
+              <span class="skill-tag">Preventive Maintenance</span>
+            </div>
+          </div>
+
+          <!-- Skill 4 -->
+          <div class="skill-card tilt-card">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">🎨</span>
+                <span class="skill-title">Desain Grafis & Estetika Cyber</span>
+              </div>
+              <span class="skill-percent">88%</span>
+            </div>
+            <div class="skill-progress-track">
+              <div class="skill-progress-bar" data-percent="88%"></div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Figma Prototyping</span>
+              <span class="skill-tag">Adobe Photoshop</span>
+              <span class="skill-tag">Cyberpunk HUD Graphics</span>
+              <span class="skill-tag">Vector SVG Creation</span>
+            </div>
+          </div>
+
+          <!-- Skill 5 -->
+          <div class="skill-card tilt-card">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">⚡</span>
+                <span class="skill-title">Spidey-Sense Problem Solving</span>
+              </div>
+              <span class="skill-percent">95%</span>
+            </div>
+            <div class="skill-progress-track">
+              <div class="skill-progress-bar" data-percent="95%"></div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Debugging & Analisis Log</span>
+              <span class="skill-tag">Critical Thinking</span>
+              <span class="skill-tag">Adaptabilitas Cepat</span>
+              <span class="skill-tag">Eksplorasi Algoritma</span>
+            </div>
+          </div>
+
+          <!-- Skill 6 -->
+          <div class="skill-card tilt-card">
+            <div class="skill-header">
+              <div class="skill-name-wrap">
+                <span class="skill-icon">👥</span>
+                <span class="skill-title">Friendly Neighborhood Teamwork</span>
+              </div>
+              <span class="skill-percent">92%</span>
+            </div>
+            <div class="skill-progress-track">
+              <div class="skill-progress-bar" data-percent="92%"></div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Komunikasi Efektif</span>
+              <span class="skill-tag">Manajemen Proyek</span>
+              <span class="skill-tag">Etos Kerja Tinggi</span>
+              <span class="skill-tag">Empati & Kolaborasi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TIMELINE MILESTONES -->
+    <section id="timeline" class="hud-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-code">// JOURNEY MILESTONES 03</div>
+          <h2 class="section-title">PERJALANAN & <span>EDUKASI TEKNOLOGI</span></h2>
+          <p class="section-sub">Rekam jejak pembelajaran, pengembangan keahlian, dan dedikasi Almaira Ayu.</p>
+        </div>
+
+        <div class="timeline-track">
+          <!-- Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">FASE 2024 - SEKARANG</span>
+              <h3 class="timeline-heading">Eksplorasi Lanjutan TKJ & Web Cyber</h3>
+              <div class="timeline-sub">Fokus Riset & Praktik Mandiri</div>
+              <p class="timeline-body">
+                Mendalami konfigurasi jaringan tingkat lanjut, implementasi keamanan digital, serta membangun 
+                website interaktif kaya grafis bertema futuristik dan superhero.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2 (Right) -->
+          <div class="timeline-item right">
+            <div class="timeline-node"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">FASE 2023 - 2024</span>
+              <h3 class="timeline-heading">Penguasaan Jaringan Komputer Dasar</h3>
+              <div class="timeline-sub">Simulasi Topologi & Hardware</div>
+              <p class="timeline-body">
+                Mempraktikkan teknik crimping kabel jaringan UTP, konfigurasi router MikroTik, subnetting IPv4, 
+                dan diagnosa penanganan masalah hardware komputer (troubleshooting).
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">FASE 2022 - 2023</span>
+              <h3 class="timeline-heading">Fondasi Desain UI/UX & Web Dev</h3>
+              <div class="timeline-sub">Eksplorasi Kreatif & Logika Kode</div>
+              <p class="timeline-body">
+                Memulai langkah pertama dalam coding web (HTML & CSS), mempelajari prinsip desain antarmuka pengguna, 
+                serta mengeksplorasi estetika visual modern.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 4 (Right) -->
+          <div class="timeline-item right">
+            <div class="timeline-node"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">FASE INSPIRASI AWAL</span>
+              <h3 class="timeline-heading">Kecintaan pada Dunia IT & Marvel Universe</h3>
+              <div class="timeline-sub">Lahirnya Passion Teknologi</div>
+              <p class="timeline-body">
+                Terinspirasi oleh karakter Spider-Man Peter Parker dan Miles Morales yang cerdas, memiliki dedikasi tinggi 
+                dalam sains, serta selalu bertekad melindungi dan membantu sesama.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: DIGITAL SHOWCASE (PROYEK & PORTOFOLIO) -->
+    <section id="portfolio" class="hud-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-code">// DIGITAL SHOWCASE 04</div>
+          <h2 class="section-title">KARYA & <span>PROYEK INTERAKTIF</span></h2>
+          <p class="section-sub">Eksperimen inovatif yang menggabungkan estetika superhero, fisika kode, dan fungsionalitas.</p>
+        </div>
+
+        <div class="portfolio-grid">
+          <!-- Project 1 -->
+          <div class="portfolio-card tilt-card">
+            <div class="card-preview-window">
+              <span class="card-preview-badge">LIVE DEMO</span>
+              <div class="card-preview-art">
+                <svg viewBox="0 0 160 100" style="width: 80%; height: 80%;">
+                  <circle cx="80" cy="50" r="38" fill="rgba(255,16,68,0.2)" stroke="#ff1044" stroke-width="2" />
+                  <ellipse cx="80" cy="50" rx="14" ry="18" fill="#060814" stroke="#00f0ff" stroke-width="1.5" />
+                  <path d="M72 45 C74 38 82 40 85 48 C85 53 80 55 74 52 Z" fill="#00f0ff" />
+                  <path d="M88 45 C86 38 78 40 75 48 C75 53 80 55 86 52 Z" fill="#00f0ff" />
+                  <!-- laser lines -->
+                  <line x1="20" y1="50" x2="60" y2="50" stroke="#00f0ff" stroke-dasharray="3,3" />
+                  <line x1="100" y1="50" x2="140" y2="50" stroke="#00f0ff" stroke-dasharray="3,3" />
+                </svg>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-type">Web Interaktif & Grafis HD</div>
+              <h3 class="portfolio-title">Cyber Spider-Verse Hub</h3>
+              <p class="portfolio-desc">
+                Portal web profil masa depan dengan sistem partikel canvas web laser, synthesizer audio Web Audio API, 
+                dan 4 varian tema kostum superhero dinamis.
+              </p>
+              <div class="portfolio-tech-list">
+                <span class="tech-tag">HTML5 Canvas</span>
+                <span class="tech-tag">Web Audio API</span>
+                <span class="tech-tag">Cyberpunk HUD</span>
+                <span class="tech-tag">Vanilla JS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="portfolio-card tilt-card">
+            <div class="card-preview-window">
+              <span class="card-preview-badge">CONCEPT INTERFACE</span>
+              <div class="card-preview-art">
+                <svg viewBox="0 0 160 100" style="width: 80%; height: 80%;">
+                  <!-- Network topology graph -->
+                  <circle cx="80" cy="25" r="10" fill="#00f0ff" />
+                  <circle cx="40" cy="75" r="8" fill="#ff1044" />
+                  <circle cx="120" cy="75" r="8" fill="#00e676" />
+                  <line x1="80" y1="25" x2="40" y2="75" stroke="#00f0ff" stroke-width="2" />
+                  <line x1="80" y1="25" x2="120" y2="75" stroke="#00f0ff" stroke-width="2" />
+                  <line x1="40" y1="75" x2="120" y2="75" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="4,4" />
+                </svg>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-type">Infrastruktur & Jaringan</div>
+              <h3 class="portfolio-title">Stark Network Monitor HUD</h3>
+              <p class="portfolio-desc">
+                Konsep antarmuka visualisasi topologi jaringan lokal (LAN), monitoring paket data real-time, 
+                dan deteksi status link router berbasis styling Stark Industries.
+              </p>
+              <div class="portfolio-tech-list">
+                <span class="tech-tag">TKJ Protocol</span>
+                <span class="tech-tag">Network Mapping</span>
+                <span class="tech-tag">UI/UX Design</span>
+                <span class="tech-tag">Packet Tracking</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="portfolio-card tilt-card">
+            <div class="card-preview-window">
+              <span class="card-preview-badge">AI COMPANION</span>
+              <div class="card-preview-art">
+                <svg viewBox="0 0 160 100" style="width: 80%; height: 80%;">
+                  <!-- Chibi Spidey in action -->
+                  <circle cx="80" cy="45" r="22" fill="#ff1044" stroke="#060814" stroke-width="2" />
+                  <ellipse cx="73" cy="43" rx="5" ry="7" fill="#fff" />
+                  <ellipse cx="87" cy="43" rx="5" ry="7" fill="#fff" />
+                  <path d="M80 67 L80 82 M73 82 L87 82" stroke="#00f0ff" stroke-width="3" />
+                  <!-- Web string -->
+                  <line x1="80" y1="23" x2="80" y2="0" stroke="#fff" stroke-dasharray="2,2" />
+                </svg>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-type">Animasi & Fisika Web</div>
+              <h3 class="portfolio-title">Chibi Spidey Autonomous Agent</h3>
+              <p class="portfolio-desc">
+                Karakter digital Chibi Spider-Man interaktif yang dapat berjalan otomatis di layar, mengikuti kursor mouse, 
+                berayun dengan simulasi pendulum, serta berdialog secara cerdas.
+              </p>
+              <div class="portfolio-tech-list">
+                <span class="tech-tag">SVG Dynamic Physics</span>
+                <span class="tech-tag">Pendulum Mechanics</span>
+                <span class="tech-tag">Drag & Drop</span>
+                <span class="tech-tag">Speech Engine</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SPIDER-VERSE WISDOM & QUOTES -->
+    <section id="quotes" class="hud-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-code">// MARVEL INSPIRATION 05</div>
+          <h2 class="section-title">FILOSOFI <span>SPIDER-VERSE</span></h2>
+          <p class="section-sub">Kutipan abadi yang menjadi sumber inspirasi bagi ketangguhan dan etos kerja Almaira Ayu.</p>
+        </div>
+
+        <div class="quotes-grid">
+          <div class="quote-hud-card tilt-card">
+            <div class="quote-icon">❝</div>
+            <p class="quote-text">"With great power comes great responsibility."</p>
+            <div class="quote-author">— STAN LEE / PETER PARKER</div>
+          </div>
+
+          <div class="quote-hud-card tilt-card">
+            <div class="quote-icon">❝</div>
+            <p class="quote-text">"Anyone can wear the mask. You could wear the mask. If you didn't know that before, I hope you do now."</p>
+            <div class="quote-author">— MILES MORALES (INTO THE SPIDER-VERSE)</div>
+          </div>
+
+          <div class="quote-hud-card tilt-card">
+            <div class="quote-icon">❝</div>
+            <p class="quote-text">"When will I know I'm ready? — You won't. It's a leap of faith. That's all it is, Miles. A leap of faith."</p>
+            <div class="quote-author">— PETER B. PARKER</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: STARK CONTACT TERMINAL -->
+    <section id="contact" class="hud-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-code">// STARK COMMS TERMINAL 06</div>
+          <h2 class="section-title">HUBUNGI <span>ALMAIRA AYU</span></h2>
+          <p class="section-sub">Kirimkan pesan digital atau terhubung langsung melalui jaringan komunikasi masa depan.</p>
+        </div>
+
+        <div class="terminal-hud-box">
+          <!-- Terminal Topbar -->
+          <div class="terminal-topbar">
+            <div class="terminal-dots">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+            </div>
+            <span class="terminal-title-text">stark-comms://almaira-ayu.tkj/send-signal</span>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #00e676;">SECURE (TLS 1.3)</span>
+          </div>
+
+          <!-- Terminal Content Grid -->
+          <div class="terminal-content-grid">
+            <!-- Left: Message Form -->
+            <form id="terminal-form" class="terminal-form-side">
+              <div class="input-hud-group">
+                <label for="term-name">> NAMA PENGIRIM / CALLSIGN *</label>
+                <input type="text" id="term-name" class="input-hud" placeholder="Contoh: Peter Parker / Rekan IT" required>
+              </div>
+
+              <div class="input-hud-group">
+                <label for="term-contact">> EMAIL ATAU KONTAK SOCIAL *</label>
+                <input type="text" id="term-contact" class="input-hud" placeholder="email@domain.com / @username" required>
+              </div>
+
+              <div class="input-hud-group">
+                <label for="term-msg">> PESAN DIGITAL *</label>
+                <textarea id="term-msg" class="input-hud" placeholder="Tuliskan pesan, ajakan kolaborasi, atau salam hangat untuk Almaira Ayu..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-spider-primary" style="align-self: flex-start; margin-top: 6px;">
+                <span>🚀 TRANSMIT SIGNAL</span>
+              </button>
+            </form>
+
+            <!-- Right: Interactive CLI Console Log -->
+            <div class="terminal-output-side">
+              <div class="terminal-console" id="terminal-output">
+                <div class="terminal-line info">> STARK COMMUNICATIONS KERNEL v5.0.2</div>
+                <div class="terminal-line info">> Target Node: Almaira Ayu (TKJ Specialist)</div>
+                <div class="terminal-line info">> Jalur enkripsi: Quantum Spider-Web OK.</div>
+                <div class="terminal-line quote">> "Silakan ketikkan pesan Anda pada formulir di sebelah kiri dan klik Transmit Signal."</div>
+              </div>
+
+              <!-- Direct Connect Links -->
+              <div class="social-links-row">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn">
+                  <span>📸</span> <span>Instagram</span>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn">
+                  <span>💻</span> <span>GitHub</span>
+                </a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-btn">
+                  <span>💬</span> <span>WhatsApp</span>
+                </a>
+                <a href="mailto:almaira@example.com" class="social-btn">
+                  <span>✉️</span> <span>Email</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="cyber-footer">
+    <div class="container">
+      <div class="footer-spidey-quote">"WITH GREAT POWER COMES GREAT RESPONSIBILITY"</div>
+      <p class="footer-copy">
+        &copy; 2026 <strong>Almaira Ayu</strong> // Cyber Spider-Verse Experience. Dibuat dengan cinta, dedikasi teknologi, 
+        dan sentuhan grafis Marvel Spider-Man.
+      </p>
     </div>
+  </footer>
 
-    <!-- Scripts: Modular Architecture -->
-    <script src="js/audio.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/terminal.js"></script>
-    <script src="js/main.js"></script>
+  <!-- JAVASCRIPT MODULES -->
+  <script src="sound.js"></script>
+  <script src="web-shooter.js"></script>
+  <script src="chibi-spidey.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
